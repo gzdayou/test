@@ -1,0 +1,54 @@
+[2018-04-16 02:45:24] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '213070643305' ) LIMIT 1  
+[2018-04-16 02:45:24] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '213070643305' )
+[2018-04-16 02:45:24] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '21307064335' )
+[2018-04-16 04:01:55] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '213070643305' ) LIMIT 1  
+[2018-04-16 04:01:55] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '213070643305' )
+[2018-04-16 04:01:55] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '21307064335' )
+[2018-04-16 09:07:26] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '213070643305' ) LIMIT 1  
+[2018-04-16 09:07:26] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '213070643305' )
+[2018-04-16 09:07:26] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '21307064335' )
+[2018-04-16 09:08:21] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '213070643305' ) LIMIT 1  
+[2018-04-16 09:08:21] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '213070643305' )
+[2018-04-16 09:08:21] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '21307064335' )
+[2018-04-16 13:35:33] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '213070643305' ) LIMIT 1  
+[2018-04-16 13:35:33] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '213070643305' )
+[2018-04-16 13:35:33] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '21307064335' )
+[2018-04-16 13:52:15] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '213070643305' ) LIMIT 1  
+[2018-04-16 13:52:16] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '213070643305' )
+[2018-04-16 13:52:16] /admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'acesoft.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '21307064335' )

@@ -1,0 +1,18 @@
+[2018-06-02 11:30:15] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '614332729005' ) LIMIT 1  
+[2018-06-02 11:30:15] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '614332729005' )
+[2018-06-02 11:30:15] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '61433272905' )
+[2018-06-02 21:08:27] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '614332729005' ) LIMIT 1  
+[2018-06-02 21:08:27] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '614332729005' )
+[2018-06-02 21:08:27] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '61433272905' )

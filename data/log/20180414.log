@@ -1,0 +1,9 @@
+[2018-04-14 17:21:37] /ACE_Web_Demo/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_demo.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '974323923005' ) LIMIT 1  
+[2018-04-14 17:21:37] /ACE_Web_Demo/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_demo.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '974323923005' )
+[2018-04-14 17:21:37] /ACE_Web_Demo/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_demo.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '97432392305' )

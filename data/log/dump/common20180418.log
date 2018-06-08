@@ -1,0 +1,12 @@
+[2018-04-18 16:08:15]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "FREQ_LDBEMER","MsgProp": "18","MsgValue": "43"}}
+[2018-04-18 16:08:15]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "SYS_CTRLMODE","MsgProp": "18","MsgValue": "3"}}
+[2018-04-18 16:09:06]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "FREQ_LDBEMER","MsgProp": "18","MsgValue": "43"}}
+[2018-04-18 16:09:06]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "SYS_CTRLMODE","MsgProp": "18","MsgValue": "3"}}
+[2018-04-18 16:30:24]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "FREQ_LDBEMER","MsgProp": "18","MsgValue": "33"}}
+[2018-04-18 16:30:24]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "SYS_CTRLMODE","MsgProp": "18","MsgValue": "3"}}
+[2018-04-18 16:30:45]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "FREQ_LDBEMER","MsgProp": "18","MsgValue": "10"}}
+[2018-04-18 16:30:45]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "SYS_CTRLMODE","MsgProp": "18","MsgValue": "3"}}
+[2018-04-18 16:33:26]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "FREQ_LDBEMER","MsgProp": "18","MsgValue": "38"}}
+[2018-04-18 16:33:26]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "SYS_CTRLMODE","MsgProp": "18","MsgValue": "3"}}
+[2018-04-18 16:36:33]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "FREQ_LDBEMER","MsgProp": "18","MsgValue": "39"}}
+[2018-04-18 16:36:33]-->{"MSGOBJ": {"MsgType": "CTRLCMD","MsgName": "SYS_CTRLMODE","MsgProp": "18","MsgValue": "3"}}

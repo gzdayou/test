@@ -1,0 +1,356 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: "SimHei";
+}
+
+.warp {
+	background: url(../image/loginBack.gif)no-repeat;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+}
+
+h1 {
+	margin: 0;
+}
+
+.logoImg {
+	width: 100%;
+	height: 100%;
+}
+
+.logo {
+	width: 14%;
+	height: 6%;
+	position: absolute;
+	top: 4.1vw;
+	left: 5.6vw;
+}
+
+.content {
+	width: 42.7%;
+	margin: 0 auto;
+}
+
+.detail {
+	width: 100%;
+	position: relative;
+	height: 0;
+	overflow: hidden;
+	padding-bottom: 105%;
+
+}
+
+.loginBox {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+}
+
+input {
+	/*outline: none;*/
+	font-size: 1vw;
+}
+
+input::-webkit-input-placeholder {
+	font-size: 1vw;
+	color: #717171;
+	font-family: "SimHei";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+button:hover {
+	background: #28323d;
+}
+
+input:-ms-input-placeholder {
+	font-size: 1vw;
+	color: #717171;
+	font-family: "SimHei";
+}
+
+.account,
+.pwd {
+	width: 53.4%;
+	height: 8.6%;
+	border: none;
+	border-radius: 3px;
+	position: absolute;
+	left: 21.7%;
+	text-indent: 6%;
+}
+
+.account {
+	top: 39%;
+}
+
+.pwd {
+	top: 49.8%;
+	height: 8.8%;
+}
+
+.code {
+	width: 23.6%;
+	height: 8.8%;
+	position: absolute;
+	border-radius: 3px;
+	border: none;
+	left: 21.7%;
+	top: 60.7%;
+	text-indent: 10%;
+}
+
+.codeImg {
+	width: 27.68%;
+	height: 8.7%;
+	position: absolute;
+	left: 47.4%;
+	top: 60.8%;
+	border-radius: 3px;
+}
+
+.remBtn {
+	position: absolute;
+	left: 21.5%;
+	top: 71.5%;
+	width: 2%;
+	height: 3%;
+	display: inline-block;
+	border: none;
+}
+
+.remWord {
+	position: absolute;
+	left: 26%;
+	top: 72%;
+	font-size: 1vw;
+}
+
+
+/*.loginBtn {
+	width: 44.3%;
+	height: 5.5%;
+	position: absolute;
+	border: none;
+	border-radius: 3px;
+	background: #313e4b;
+	color: #fff;
+	font-weight: bold;
+	left: 20.6%;
+	top: 76%;
+	font-size: 1vw;
+	font-family: "SimHei";
+}*/
+
+.loginBtn {
+	position: relative;
+	color: rgba(255, 255, 255, 1);
+	text-decoration: none;
+	background-color: rgba(49, 62, 75, 1);
+	font-family: "SimHei";
+	font-weight: 700;
+	font-size: 1vw;
+	display: block;
+	padding: 8px;
+	border-radius: 3px;
+	margin: 100px auto;
+	width: 44.3%;
+	height: 2.2vw;
+	text-align: center;
+	-webkit-transition: all .1s ease;
+	-moz-transition: all .1s ease;
+	transition: all .1s ease;
+	margin-top: 81%;
+	margin-left: 21%;
+    border:none;
+}
+
+.loginBtn:active {
+	box-shadow: 0px 3px 0px rgba(40, 50, 61, 1), 0px 3px 6px rgba(0, 0, 0, .9);
+	position: relative;
+	top: 6px;
+}
+.loginBtn:hover{
+	cursor: pointer;
+}
+.intro {
+    width: 50%;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: rgba(10, 10, 10, 0.15);
+    border: 2px ridge rgba(238, 238, 238, 0.13);
+    border-radius: 5px;
+    -moz-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    -webkit-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    border-bottom: none;
+    border-bottom-left-radius: initial;
+    border-bottom-right-radius: initial;
+}
+/*
+CSS Reset
+http://meyerweb.com/eric/tools/css/reset/
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* particleground demo */
+
+* { 
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+
+#particles {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.intro {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 0 20px;
+  width: 30%;
+  text-align: center;
+}
+h1 {
+  text-transform: uppercase;
+  font-size: 85px;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+}
+
+p {
+  margin: 0 0 30px 0;
+  font-size: 24px;
+}
+.btn {
+  display: inline-block;
+  padding: 15px 30px;
+  border: 2px solid #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: all 0.4s;
+     -moz-transition: all 0.4s;
+       -o-transition: all 0.4s;
+          transition: all 0.4s;
+}
+.btn:hover {
+  color: #005544;
+  border-color: #005544;
+}
+
+@media only screen and (max-width: 1000px) {
+  h1 {
+    font-size: 70px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  h1 {
+    font-size: 48px;
+  }
+  h1::after {
+    height: 8px;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .intro {
+    padding: 0 10px;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  h1::after {
+    height: 6px;
+  }
+  p {
+    font-size: 18px;
+  }
+  .btn {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  h1 {
+    font-size: 28px;
+  }
+  h1::after {
+    height: 4px;
+  }
+}

@@ -1,0 +1,16 @@
+<?php defined('ByAcesoft') or exit('Access Invalid!'); return array (
+  'acedevday' => 'ID',
+  'acedevenergy' => 'ID',
+  'admin' => 'admin_id',
+  'admin_log' => 'id',
+  'alarm_log' => 'id',
+  'devicerealtime' => 'ID',
+  'devices' => 'DeviceID',
+  'devicestate' => 'ID',
+  'envrealtime' => 'ID',
+  'gadmin' => 'gid',
+  'hostrealtime' => 'ID',
+  'log_error' => 'ID',
+  'log_operation' => 'ID',
+  'loopbranch' => 'ID',
+);

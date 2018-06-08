@@ -1,0 +1,99 @@
+[2018-04-23 03:52:03] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '287632490405' ) LIMIT 1  
+[2018-04-23 03:52:03] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '287632490405' )
+[2018-04-23 03:52:03] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '28763249045' )
+[2018-04-23 04:39:17] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '287632490405' ) LIMIT 1  
+[2018-04-23 04:39:17] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '287632490405' )
+[2018-04-23 04:39:17] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '28763249045' )
+[2018-04-23 09:02:49] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '287632490405' ) LIMIT 1  
+[2018-04-23 09:02:49] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '287632490405' )
+[2018-04-23 09:02:49] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '28763249045' )
+[2018-04-23 10:42:35] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '287632490405' ) LIMIT 1  
+[2018-04-23 10:42:35] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '287632490405' )
+[2018-04-23 10:42:35] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '28763249045' )
+[2018-04-23 10:42:44] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-23 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-23%' ) LIMIT -22,22  
+[2018-04-23 10:43:56] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '200289852605' ) LIMIT 1  
+[2018-04-23 10:43:56] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '20028985265' ) LIMIT 1  
+[2018-04-23 10:43:56] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '20028985265' ) LIMIT 1  
+[2018-04-23 10:43:56] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+INSERT  INTO `t_lock` (pid,pvalue,expiretime) VALUES ('20028985265','1','1524473636')
+[2018-04-23 10:44:03] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '200289852605' ) LIMIT 1  
+[2018-04-23 10:44:03] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '200289852605' )
+[2018-04-23 10:44:03] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '20028985265' )
+[2018-04-23 10:50:44] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-20 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-20%' ) LIMIT -22,22  
+[2018-04-23 10:50:47] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-19 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-19%' ) LIMIT -22,22  
+[2018-04-23 10:50:49] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-18 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-18%' ) LIMIT -22,22  
+[2018-04-23 10:51:50] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-18 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-18%' ) LIMIT -22,22  
+[2018-04-23 11:24:44] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-22 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-22%' ) LIMIT -22,22  
+[2018-04-23 11:24:47] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-21 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-21%' ) LIMIT -22,22  
+[2018-04-23 11:24:49] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-20 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-20%' ) LIMIT -22,22  
+[2018-04-23 11:24:51] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-19 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-19%' ) LIMIT -22,22  
+[2018-04-23 11:24:52] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-18 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-18%' ) LIMIT -22,22  
+[2018-04-23 11:29:11] /ACE_Web_HYRMYY/admin/modules/system/index.php?act=energy_report&op=temperature_ajax&day=2018-04-23 ( act=energy_report&op=temperature_ajax ) 
+ERR: Db Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-22,22' at line 1
+SELECT RecordTime, T1, T2, T3, T4 FROM `t_envrealtime` WHERE ( RecordTime LIKE '2018-04-23%' ) LIMIT -22,22  
+[2018-04-23 13:49:43] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+SELECT * FROM `t_lock` WHERE ( pid = '454137647005' ) LIMIT 1  
+[2018-04-23 13:49:43] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '454137647005' )
+[2018-04-23 13:49:43] /ACE_Web_HYRMYY/admin/index.php?act=login&op=login ( act=login&op=login ) 
+ERR: Db Error: Table 'ace_hyrmyy.t_lock' doesn't exist
+DELETE  FROM `t_lock` WHERE ( pid = '45413764705' )
