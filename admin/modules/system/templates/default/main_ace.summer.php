@@ -1,24 +1,19 @@
 <?php defined('ByAcesoft') or exit('Access Invalid!');?>
 <style>
+    body {
+        /*background: url("<?php echo ADMIN_RESOURCE_URL;?>/image/source_station_bg.jpg") repeat-y;*/
+    }
     .content{overflow: hidden; width: 100%; height: 838px; background: url('<?php echo ADMIN_RESOURCE_URL;?>/image/source_station_bg.jpg') repeat-y; }
     .page {padding: 62px 0 0 10px;}
-    #param_box {border: 1px solid #404040; color: #404040; width: 1090px; height: 233px; background: url('<?php echo ADMIN_RESOURCE_URL;?>/image/main_param_bg.jpg') repeat-x;}
+    #param_box { border: 1px solid #404040; color: #404040; width: 1090px; height: 233px; background: url('<?php echo ADMIN_RESOURCE_URL;?>/image/main_param_bg.jpg') repeat-x;}
     #box_left, #box_right { position: absolute; margin-top: 10px; }
-    #box_left { left: 30px; width: 780px; color: #606060;}
-    #box_left h3, #box_right h3 {font-size: 22px; line-height: 36px; font-weight: normal; }
-    #box_left .params { margin-top: 20px; width: 800px; }
+    #box_left { left: 30px; width: 780px; }
+    #box_right { left: 840px; }
+    #box_left h3, #box_right h3 {font-size: 24px; line-height: 36px; font-weight: normal; }
+    #box_left .params { margin-top: 40px; width: 800px; }
     #box_left .params .row{ width: 33%; font-size: 16px; float: left; }
     #box_left .params .row span {display:inline-block; text-align: center; height: 30px; width: 80px; border: 1px solid #508c8c; color: #508c8c;}
     #box_left .params .row p {line-height: 37px; }
-    dl { display: inline-block; width: 250px; margin-bottom: 10px; }
-    dl dt, dl dd { float:left; font-size: 16px; }
-    dl dt {text-align: left; width: 80px;}
-    dl dd {text-align: center; width: 80px;}
-    #box_right { left: 840px; }
-    #b_right{position: absolute; top: 666px; left: 800px; border-left:1px solid #404040;border-right:1px solid #404040; height: 233px;background: url('<?php echo ADMIN_RESOURCE_URL;?>/image/main_right_bg.jpg') repeat-x;}
-    #b_right h3 {font-size: 22px; line-height: 36px; font-weight: normal; margin-top: 10px; color: #508c8c; margin-left: 15px; margin-bottom:10px;}
-    #b_right dl {margin-left: 15px; line-height: 36px;}
-    .c_l {color: #508c8c; font-size: 22px;}
     .onoff .cb-enable, .onoff .cb-disable {  font-size: 12px;  line-height: 26px;  height: 26px;  padding: 1px 9px;  border-style: solid; }
     .content #left_fan_1 {position: absolute; top: 282px; left: 275px;z-index: 100;}
     .content #left_fan_2 {position: absolute; top: 344px; left: 255px;z-index: 100;}
@@ -38,9 +33,9 @@
     .content #ldb_status_1 {position: absolute; top: 301px; left: 276px;}
     .content #ldb_status_2 {position: absolute; top: 364px; left: 257px;}
     .content #ldb_status_3 {position: absolute; top: 435px; left: 234px;}
-    .content #lqb_status_1 {position: absolute; top: 301px; left: 815px;}
-    .content #lqb_status_2 {position: absolute; top: 363px; left: 833px;}
-    .content #lqb_status_3 {position: absolute; top: 436px; left: 854px;}
+    .content #lqb_status_1 {position: absolute; top: 301px; left: 813px;}
+    .content #lqb_status_2 {position: absolute; top: 364px; left: 832px;}
+    .content #lqb_status_3 {position: absolute; top: 436px; left: 852px;}
     .content #host_light_1 {position: absolute; top: 270px; left: 501px;}
     .content #host_light_2 {position: absolute; top: 366px; left: 496px;}
     .content #host_light_3 {position: absolute; top: 482px; left: 488px;}
@@ -53,6 +48,24 @@
     .content #lqb_yx_1 {position: absolute; top: 288px; left: 816px;}
     .content #lqb_yx_2 {position: absolute; top: 349px; left: 834px;}
     .content #lqb_yx_3 {position: absolute; top: 421px; left: 854px;}
+    .notice { position: absolute; top: 560px; left: 395px; }
+    .p_right div {  position: absolute;  left: 875px;  background: url(<?php echo ADMIN_RESOURCE_URL;?>/image/data_bg.png) no-repeat;  width: 190px;  height: 37px;  font-size: 14px;  line-height: 37px;  color: #fff;  padding: 0 0 0 10px;  }
+    .p_right span { margin-left: 10px; position: absolute;background: url(<?php echo ADMIN_RESOURCE_URL;?>/image/data_bg.png) no-repeat;width: 100px;height: 37px;font-size: 14px; font-weight:bold;line-height: 37px;color: #fff;padding: 0 0 0 10px; }
+    .p_right .p1 {  top: 220px;  }
+    .p_right .p2 {  top: 270px;  }
+    .p_right .p3 {  top: 320px;  }
+    .p_right .p4 {  top: 370px;  }
+    .p_right .p5 {  top: 420px;  }
+    .p_right .p6 {  top: 470px;  }
+    .p_right .p7 {  top: 520px;  }
+    dl { display: inline-block; width: 250px; margin-bottom: 10px; }
+    dl dt, dl dd { float:left; font-size: 16px; }
+    dl dt {text-align: left; width: 80px;}
+    dl dd {text-align: center; width: 80px;}
+    #b_right{position: absolute; top: 666px; left: 800px; border-left:1px solid #404040;border-right:1px solid #404040; height: 233px;background: url('<?php echo ADMIN_RESOURCE_URL;?>/image/main_right_bg.jpg') repeat-x;}
+    #b_right h3 {font-size: 24px; line-height: 36px; font-weight: normal; margin-top: 10px; color: #508c8c; margin-left: 15px; margin-bottom:22px;}
+    #b_right dl {margin-left: 15px; line-height: 40px;}
+    .c_l {color: #508c8c; font-size: 22px;}
 </style>
 <div class="page">
   <div class="fixed-bar">
@@ -327,12 +340,17 @@ $(function(){
                         if( info.CurState & 1 ) {
                             $("#left_fan_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LDB1_Lf.gif" width="20" >');
                             $("#ldb_yx_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/RSB1-YX.png" height="'+hei+'" >');
-                        }
+                        } else {
+							$("#left_fan_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LDB1_Lf.png" width="20" >');
+							$("#ldb_yx_" + idx).html('');
+						}
                         //非控状态
                         if( info.CurMode != 1 ) {
                             var height = (idx == 3) ? 24 : 22;
                             $("#ldb_status_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LDB1_NC.png" height="'+height+'" >');
-                        }
+                        } else {
+							$("#ldb_status_" + idx).html('');
+						}
                         //泵故障状态
                         if( info.CurState & 2 ) {
                             var height = (idx == 3) ? 24 : 22;
@@ -351,12 +369,16 @@ $(function(){
                         if( info.CurState & 1 ) {
                             $("#right_fan_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LQB1_Lf.gif" width="20" >');
                             $("#lqb_yx_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LQB1_YX.png" height="'+hei+'" >');
-                        }
+                        } else {
+							$("#right_fan_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LQB1_Lf.png" width="20" >');
+							$("#lqb_yx_" + idx).html('');
+						}
+						$("#lqb_status_" + idx).html('');
                         //非控状态
                         if( info.CurMode != 1 ) {
                             var height = (idx == 3) ? 24 : 22;
                             $("#lqb_status_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LQB1_NC.png" height="'+height+'" >');
-                        }
+                        } 
                         //泵故障状态
                         if( info.CurState & 2 ) {
                             var height = (idx == 3) ? 24 : 22;
@@ -375,7 +397,11 @@ $(function(){
                             $("#host_light_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/Host1_YX.png" width="'+height[i]+'" >');
                             var height = [30,30,34];
                             $("#center_wheel_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/Host1_Lf.gif" height="'+height[i]+'" >');
-                        }
+                        } else {
+							$("#host_light_" + idx).html('');
+							$("#center_wheel_" + idx).html('');
+						}
+						$("#host_status_" + idx).html('');
                         //主机故障状态
                         if( info.CurState & 2 ) {
                             var height = [22,24,27];
@@ -394,7 +420,10 @@ $(function(){
                         if( lqtInfo.FeedOn & wei ) {
                             $("#lqt_status_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LQT1_YX.png" width="36" >');
                             $("#top_fan_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LQT1_Lf.gif" width="30" >');
-                        }
+                        } else {
+							$("#lqt_status_" + idx).html('');
+                            $("#top_fan_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LQT1_Lf.png" width="30" >');
+						}
                         //故障反馈状态
                         if( lqtInfo.FeedErr & wei ) {
                             $("#lqt_status_" + idx).html('<img src="<?php echo ADMIN_RESOURCE_URL;?>/image/source_station/LQT1_A.png" width="36" >');
