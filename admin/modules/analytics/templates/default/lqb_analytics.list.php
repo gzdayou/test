@@ -25,7 +25,7 @@
                 </select>
             </dt>
             <dd>
-                <select name="date_type" id="date_type" class="valid" onchange="show_option(this.value)">
+                <select name="date_type" id="date_type" class="valid" onchange="show_options(this.value)">
                     <option value="1">按日</option>
                     <option value="2">按月</option>
                 </select>
@@ -81,10 +81,23 @@
 <script src="<?php echo ADMIN_RESOURCE_URL;?>/js/highcharts.js"></script>
 <script>
 
+function show_options(val){
+    if( val == 1 ) {
+        var wdate_day = '<?php echo $output['wdate_day']; ?>' ;
+        $("#option").html('选择日期：<input class="Wdate" type="text" onclick="WdatePicker({skin:\'whyGreen\',minDate:\'2010-09-10\',maxDate:\'2050-12-20\'})"/>');
+        $(".Wdate").val("<?php echo $output['wdate_day']; ?>");
+        getData("<?php echo $output['wdate_day']; ?>", val, 301);
+    }
+    if( val == 2 ) {
+        var wdate_month = '<?php echo $output['wdate_month']; ?>' ;
+        $("#option").html('选择月份：<input type="text" class="Wdate"  onclick="WdatePicker({dateFmt:\'yyyy-MM\',minDate:\'2000-1\',maxDate:\'2050-12\'})" />');
+        $(".Wdate").val("<?php echo $output['wdate_month']; ?>");
+        getData("<?php echo $output['wdate_month']; ?>", val, 301);
+    }
+}
+
 //显示搜索框
-show_option(1);
-$(".Wdate").val("<?php echo $output['wdate']; ?>");
-getData("<?php echo $output['wdate']; ?>", 1, 301);
+show_options(1);
 
 var chart_option = {
     chart: {
@@ -146,10 +159,9 @@ function getData(Wdate, date_type, device) {
                 avgcop = t.data.avgcop;
                 sysinfo = t.data.sysinfo;
                 //系统信息
-                //$("#t_refrigerator").html(sysinfo.t_refrigerator == null ? "&nbsp;" : parseFloat(sysinfo.t_refrigerator).toFixed(2));//系统总制冷
-                $("#t_energy").html(sysinfo.t_energy == null ? "&nbsp;" : parseFloat(sysinfo.t_energy).toFixed(2));//总耗电量
-                $("#t_time").html(sysinfo.t_time == null ? "&nbsp;" : parseFloat(sysinfo.t_time).toFixed(2));//总运行时间
-                $("#avgcop").html(sysinfo.avgfreq == null ? "&nbsp;" : parseFloat(sysinfo.avgfreq).toFixed(2));//平均COP
+                $("#t_energy").html(sysinfo.ttEnergy == null ? "&nbsp;" : ftwo(sysinfo.ttEnergy));//总耗电量
+                $("#t_time").html(sysinfo.ttRun == null ? "&nbsp;" : ftwo(sysinfo.ttRun));//总运行时间
+                $("#avgcop").html(sysinfo.avgcop == null ? "&nbsp;" : ftwo(sysinfo.avgcop));//平均COP
                 //按日折线图
                 if( date_type == 1 ) {
                     for( i=0; i<24; i++ ) {

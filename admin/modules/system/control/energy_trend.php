@@ -1,12 +1,12 @@
 <?php
 /**
- * 能耗报表
+ * 能耗趋势
  */
 
 defined('ByAcesoft') or exit('Access Invalid!');
 class energy_trendControl extends SystemControl{
     private $links = array(
-        array('url'=>'act=energy_report&op=base', 'text' => '系统组件耗能'),
+        //array('url'=>'act=energy_report&op=base', 'text' => '系统组件耗能'),
         // array('url'=>'act=energy_report&op=temperature', 'text' => '水温报表'),
         // array('url'=>'act=energy_report&op=save_energy', 'text' => '节省与减排'),
     );
@@ -20,7 +20,7 @@ class energy_trendControl extends SystemControl{
     }
 
     /**
-     * 系统组件耗能页面展示
+     * 能耗趋势页面展示
      */
     public function baseOp(){
         $end = date('Y-m-d');
@@ -37,7 +37,7 @@ class energy_trendControl extends SystemControl{
     }
 
     /**
-     * 系统组件耗能ajax数据获取
+     * 能耗趋势ajax数据获取
      */
     public function component_ajaxOp() {
         $data = $this -> _search_component($_GET['begin'], $_GET['end']);
@@ -48,15 +48,14 @@ class energy_trendControl extends SystemControl{
     }
 
     /**
-     * 组件能耗数据查询
+     * 能耗趋势数据查询
      */
     private function _search_component( $begin, $end ) {
-        $sub_sql = "SELECT *, LEFT(DeviceId, 2) AS d_type, MAX(`CurEnergy`) AS energy, DATE_FORMAT(RecordTime,'%Y-%m-%d') AS days, DATE_FORMAT(RecordTime,'%m月%d') AS day2  FROM `".DBPRE."devicerealtime` WHERE `RecordTime` > '". $begin ."' AND `RecordTime` < '".$end."' GROUP BY `RecordTime`, `DeviceID`";
-
-        $model = Model();
-		$condition = array();
-		$sql = "SELECT a.ID,a.days,a.d_type, SUM(a.energy) as energy, a.day2 FROM (". $sub_sql ." ) AS a GROUP BY a.d_type, a.days";
-        $res = $model -> query( $sql );
+        $model = Model() ;
+        $res = $model->table('acedevday')
+                ->field("LEFT(`DeviceID`, 2) AS d_type, SUM(`DayEnergy`) AS energy, DATE_FORMAT(RecordDate,'%Y-%m-%d') AS days, DATE_FORMAT(RecordDate,'%m月%d') AS day2")
+                ->where("RecordDate >= '".$begin."' AND RecordDate <= '".$end."'")
+                ->group("d_type,days") ;
         $result = array();
         
         foreach ( $res as $value ) {

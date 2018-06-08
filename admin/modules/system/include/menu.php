@@ -40,9 +40,10 @@ $_menu['system'] = array (
                         'name' => '节能管理',
                         'child' => array(
                                 'real_elec' => '实时电量',
-                                'real_consum' => '能源监测',
+                                //'real_consum' => '能源监测',
                                 'energy_report' => '能耗报表',
                                 'energy_trend' => '能耗趋势',
+                                'energy_analys' => '能耗分析'
                         )
                 )
         ) 

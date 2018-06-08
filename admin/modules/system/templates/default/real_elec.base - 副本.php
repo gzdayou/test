@@ -48,63 +48,98 @@
 <script src="https://img.hcharts.cn/highcharts/themes/sand-signika.js"></script>
 <script>
 
-var categories = [] ;
-var data = [] ;
-
-<?php
-foreach ( $output['host'] as $k => $v ) {
-?>
-    categories.push('<?php echo $v['tm']; ?>') ;
-    data.push(<?php echo sprintf("%.2f",$v['energy']); ?>) ;
-<?php    
-}
-?>
-
-var max = getMaximin(data, "max") + 500 ;
-
-if( categories.length == 0 ) categories = ["0:00"] ;
-if( data.length == 0 ) {
-    data = [0] ;
-    max = 1000 ;
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
+function activeLastPointToolip(chart) {
+    var points = chart.series[0].points;
+    chart.tooltip.refresh(points[points.length -1]);
 }
 
 $('#container').highcharts({
     chart: {
-		type: 'line'
-	},
-    title: {
-        text: null
+        type: 'spline',
+        animation: Highcharts.svg, // don't animate in old IE
+        marginRight: 10,
+        events: {
+            load: function () {
+                // set up the updating of the chart each second
+                var series = this.series[0],
+                    chart = this;
+                var tmp = 0;
+                setInterval(function () {
+
+                    $.ajax({
+                        url: "<?php echo ADMIN_SITE_URL;?>/index.php?act=common&op=getMsgObject",
+                        type: "get",
+                        timeout : 500,
+                        dataType: "json",
+                        data: {msg_name: "HostState"},
+                        success: function (t) {
+                            var hostinfo = t.data.MSGOBJ.HostState.HostInfo;
+                            var x = (new Date()).getTime(), // current time
+                                y = hostinfo[0][0].CurEnergy + hostinfo[1][0].CurEnergy + hostinfo[2][0].CurEnergy;
+                                
+                            series.addPoint([x, y], true, true);
+                            activeLastPointToolip(chart)
+                        }
+                    });
+
+                }, 3000);
+            }
+        }
     },
-    legend : {
-        enabled : false
+    title: {
+        text: '主机电量'
     },
     xAxis: {
-        categories: categories
+        type: 'datetime',
+        tickPixelInterval: 150
     },
     yAxis: {
+        title: {
+            text: 'KW/h'
+        },
         min: 0,
-        max: max,
+        max: 10000,
         plotLines: [{
             value: 0,
             width: 1,
             color: '#808080'
-        }],
-        title: {
-            text: '冷却泵电量'
+        }]
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + '</b><br/>' +
+                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                Highcharts.numberFormat(this.y, 2);
         }
     },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: false
-            },
-            enableMouseTracking: true
-        }
+    legend: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
     },
     series: [{
-        name : "冷却泵电量" ,
-        data: data
+        name: '主机电量',
+        data: (function () {
+            // generate an array of random data
+            var data = [],
+                time = (new Date()).getTime(),
+                i;
+            for (i = -19; i <= 0; i += 1) {
+                data.push({
+                    x: time + i * 1000,
+                    y: 0
+                });
+            }
+            return data;
+        }())
     }]
+}, function(c) {
+    activeLastPointToolip(c)
 });
-
 </script>

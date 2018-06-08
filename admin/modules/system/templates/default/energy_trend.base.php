@@ -37,7 +37,7 @@ window.onload=function(){
   <div class="fixed-bar">
     <div class="item-title">
       <div class="subject">
-        <h3>系统组件耗能</h3>
+        <h3>能耗趋势</h3>
         <h5><?php echo C("project"); ?></h5>
       </div>
       <?php echo $output['top_link'];?> </div>

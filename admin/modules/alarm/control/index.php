@@ -20,7 +20,7 @@ class indexControl extends SystemControl{
 	 */
 	public function alarmOp(){
 		$model = Model();
-		$alarm_log_list = $model->table('alarm_log')->limit(200)->select();
+		$alarm_log_list = $model->table('log_error')->limit(200)->select();
 
 		Tpl::output('alarm_log_list',$alarm_log_list);
 		Tpl::output('page',$model->showpage());

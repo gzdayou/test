@@ -20,13 +20,13 @@
             <dt>
                 <select id="comb_type" name="ldz" class="valid">
                     <option value="1">系统总耗电量</option>
-                    <option value="2">系统总功率</option>
+                    <!-- <option value="2">系统总功率</option>
                     <option value="3">系统总制冷量</option>
                     <option value="4">系统运行时间</option>
                     <option value="5">系统COP值</option>
                     <option value="6">系统当天节省电量</option>
                     <option value="7">系统当天CO2减排量</option>
-                    <option value="8">系统当天节省费用</option>
+                    <option value="8">系统当天节省费用</option> -->
                     <option value="9">主机电量</option>
                     <option value="10">冷冻泵电量</option>
                     <option value="11">冷却泵电量</option>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="analytics-right fl">
-            <h3>电量比例图</h3>
+            <h3>节能数据</h3>
             <dl>
                 <dt>系统总节能：</dt>
                 <dd id="t_energy">0.00</dd>
@@ -108,7 +108,7 @@ var chart_option = {
             },
             step:2
         },
-        categories: ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00']
+        categories : ['']
     },
     yAxis: {
         title: {
@@ -128,7 +128,7 @@ var chart_option = {
     },
     series: [{
         name: null,
-        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        data : [0]
     }]
 };
 $('#chart_content').highcharts(chart_option);
@@ -142,7 +142,7 @@ $("#submitBtn").click(function(){
         alert("时间为空");
     }
 
-    
+    getData(begin, end, comb_type)
 });
 
 function getData(begin, end, comb_type) {
@@ -167,7 +167,7 @@ function getData(begin, end, comb_type) {
                         chart_option.yAxis.max = tmp;
                     }
                     
-                    search_data.push(parseFloat(parseFloat(currentValue.yval).toFixed(2)));
+                    search_data.push(parseFloat(ftwo(currentValue.yval)));
                     categories.push(parseFloat(currentValue.days));
                 });
                 
@@ -199,7 +199,7 @@ function getData(begin, end, comb_type) {
                 $("#t_money").html(save_data.save_money);
 
             }else{
-                alert(t.msg)
+                //alert(t.msg)
             }
         }
     });

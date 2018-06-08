@@ -964,8 +964,9 @@ Date.prototype.format = function(format) {
     return format;
 }
 
+
 function ftwo(val) {
-    return val > 0 ? val.toFixed(2) : 0;
+    return val > 0 ? Number(val).toFixed(2) : 0;
 }
 
 var res = 1;
@@ -986,6 +987,19 @@ function checkPermis() {
     });
     return res;
 }
+
+
+function getMaximin(arr,maximin) 
+{ 
+    if(maximin=="max") 
+    { 
+        return Math.max.apply(Math,arr); 
+    }
+    else if(maximin=="min") 
+    { 
+        return Math.min.apply(Math, arr); 
+    } 
+} 
 
 /**************************************时间格式化处理************************************/
 function dateFtt(fmt,crtTime)   

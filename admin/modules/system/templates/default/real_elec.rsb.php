@@ -48,102 +48,63 @@
 <script src="https://img.hcharts.cn/highcharts/themes/sand-signika.js"></script>
 <script>
 
-Highcharts.setOptions({
-    global: {
-        useUTC: false
-    }
-});
-function activeLastPointToolip(chart) {
-    var points = chart.series[0].points;
-    chart.tooltip.refresh(points[points.length -1]);
+var categories = [] ;
+var data = [] ;
+
+<?php
+foreach ( $output['host'] as $k => $v ) {
+?>
+    categories.push('<?php echo $v['tm']; ?>') ;
+    data.push(<?php echo sprintf("%.2f",$v['energy']); ?>) ;
+<?php    
+}
+?>
+
+var max = getMaximin(data, "max") + 500 ;
+
+if( categories.length == 0 ) categories = ["0:00"] ;
+if( data.length == 0 ) {
+    data = [0] ;
+    max = 1000 ;
 }
 
 $('#container').highcharts({
     chart: {
-        type: 'spline',
-        animation: Highcharts.svg, // don't animate in old IE
-        marginRight: 10,
-        events: {
-            load: function () {
-                // set up the updating of the chart each second
-                var series = this.series[0],
-                    chart = this;
-                var tmp = 0;
-                setInterval(function () {
-
-                    $.ajax({
-                        url: "<?php echo ADMIN_SITE_URL;?>/index.php?act=common&op=getMsgObject",
-                        type: "get",
-                        timeout : 500,
-                        dataType: "json",
-                        data: {msg_name: "RSBState"},
-                        success: function (t) {
-                            var rsbinfo = t.data.MSGOBJ.RSBState.RSBInfo;
-                            var x = (new Date()).getTime(), // current time
-                                y = rsbinfo[0][0].CurEnergy + rsbinfo[1][0].CurEnergy + rsbinfo[2][0].CurEnergy;
-                            // if( y > tmp ) {
-                            //     tmp = y;
-                            //     chart.series.yAxis = y + 100;
-                            // }
-                                
-                            series.addPoint([x, y], true, true);
-                            activeLastPointToolip(chart)
-                        }
-                    });    
-
-                }, 3000);
-            }
-        }
-    },
+		type: 'line'
+	},
     title: {
-        text: '热水泵电量'
+        text: null
+    },
+    legend : {
+        enabled : false
     },
     xAxis: {
-        type: 'datetime',
-        tickPixelInterval: 150
+        categories: categories
     },
     yAxis: {
-        title: {
-            text: 'KW/h'
-        },
         min: 0,
-        max: 10000,
+        max: max,
         plotLines: [{
             value: 0,
             width: 1,
             color: '#808080'
-        }]
-    },
-    tooltip: {
-        formatter: function () {
-            return '<b>' + this.series.name + '</b><br/>' +
-                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                Highcharts.numberFormat(this.y, 2);
+        }],
+        title: {
+            text: '热水泵电量'
         }
     },
-    legend: {
-        enabled: false
-    },
-    exporting: {
-        enabled: false
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: false
+            },
+            enableMouseTracking: true
+        }
     },
     series: [{
-        name: '热水泵电量',
-        data: (function () {
-            // generate an array of random data
-            var data = [],
-                time = (new Date()).getTime(),
-                i;
-            for (i = -19; i <= 0; i += 1) {
-                data.push({
-                    x: time + i * 1000,
-                    y: 0
-                });
-            }
-            return data;
-        }())
+        name : "热水泵电量" ,
+        data: data
     }]
-}, function(c) {
-    activeLastPointToolip(c)
 });
+
 </script>

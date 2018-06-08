@@ -23,7 +23,7 @@
                 </select>
             </dt>
             <dd>
-                <select name="date_type" id="date_type" class="valid" onchange="show_option(this.value)">
+                <select name="date_type" id="date_type" class="valid" onchange="show_options(this.value)">
                     <option value="1">按日</option>
                     <option value="2">按月</option>
                 </select>
@@ -83,11 +83,69 @@
 <script src="<?php echo ADMIN_RESOURCE_URL;?>/js/highcharts.js"></script>
 <script>
 
-//显示搜索框
-show_option(1);
+function show_options(val){
+    if( val == 1 ) {
+        var wdate_day = '<?php echo $output['wdate_day']; ?>' ;
+        $("#option").html('选择日期：<input class="Wdate" type="text" onclick="WdatePicker({skin:\'whyGreen\',minDate:\'2010-09-10\',maxDate:\'2050-12-20\'})"/>');
+        $(".Wdate").val("<?php echo $output['wdate_day']; ?>");
+        getData("<?php echo $output['wdate_day']; ?>", val);
+    }
+    if( val == 2 ) {
+        var wdate_month = '<?php echo $output['wdate_month']; ?>' ;
+        $("#option").html('选择月份：<input type="text" class="Wdate"  onclick="WdatePicker({dateFmt:\'yyyy-MM\',minDate:\'2000-1\',maxDate:\'2050-12\'})" />');
+        $(".Wdate").val("<?php echo $output['wdate_month']; ?>");
+        getData("<?php echo $output['wdate_month']; ?>", val);
+    }
+}
 
-$(".Wdate").val("<?php echo $output['wdate']; ?>");
-getData("<?php echo $output['wdate']; ?>", 1);
+//显示搜索框
+show_options(1);
+
+//$(".Wdate").val("<?php echo $output['wdate']; ?>");
+//getData("<?php echo $output['wdate']; ?>", 1);
+
+var pei_option = {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        backgroundColor: 'rgba(0,0,0,0)'
+    },
+    title: {
+        text:null,
+    },
+    tooltip: {
+        headerFormat: '{series.name}<br>',
+        pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    legend: {//控制图例显示位置
+        floating: true,
+        //layout: 'vertical',
+        align: 'left',
+        verticalAlign: 'top',
+        borderWidth: 0
+    },
+    series: [{
+        type: 'pie',
+        name: '系统COP',
+        data: [
+            ['良好',   1],
+            ['优秀',   0],
+            ['中等',   0],
+            ['较差',   0]
+        ]
+    }]
+};
 
 var chart_option = {
     chart: {
@@ -148,10 +206,10 @@ function getData(Wdate, date_type) {
                 avgcop = t.data.avgcop;
                 sysinfo = t.data.sysinfo;
                 //系统信息
-                $("#t_refrigerator").html(sysinfo.t_refrigerator == null ? "&nbsp;" : sysinfo.t_refrigerator);//系统总制冷
-                $("#t_energy").html(sysinfo.t_energy == null ? "&nbsp;" : sysinfo.t_energy);//总耗电量
-                $("#t_time").html(sysinfo.t_time == null ? "&nbsp;" : sysinfo.t_time);//总运行时间
-                $("#avgcop").html(sysinfo.avgcop == null ? "&nbsp;" : sysinfo.avgcop);//平均COP
+                $("#t_refrigerator").html(sysinfo.ttCooling == null ? "&nbsp;" : ftwo(sysinfo.ttCooling) );//系统总制冷
+                $("#t_energy").html(sysinfo.ttEnergy == null ? "&nbsp;" : ftwo(sysinfo.ttEnergy));//总耗电量
+                $("#t_time").html(sysinfo.ttRun == null ? "&nbsp;" : ftwo(sysinfo.ttRun));//总运行时间
+                $("#avgcop").html(sysinfo.avgcop == null ? "&nbsp;" : ftwo(sysinfo.avgcop));//平均COP
                 //按日折线图
                 if( date_type == 1 ) {
                     for( i=0; i<24; i++ ) {
@@ -163,6 +221,9 @@ function getData(Wdate, date_type) {
                     }
                     chart_option.series[0].data = search_data;
                     $('#chart_content').highcharts(chart_option);
+
+                    //饼图
+                    $('#pie_content').highcharts();
                 }
                 //按月折线图
                 if( date_type == 2 ) {
@@ -178,80 +239,15 @@ function getData(Wdate, date_type) {
                     chart_option.xAxis.categories = x_days;
                     chart_option.series[0].data = search_data;
                     $('#chart_content').highcharts(chart_option);
+
+                    //饼图
+                    $('#pie_content').highcharts();
                 }
             }else{
-                alert(t.msg)
+                //alert(t.msg)
             }
         }
     });
 }
 
 </script>
-
-<!------------------------------ 饼图JS开始 ------------------------>
-<script>
-
-$(function () {
-
-    // $.ajax({
-    //     url: "<?php echo ADMIN_SITE_URL;?>/modules/analytics/index.php?act=index&op=get_sysinfo_ajax",
-    //     type: "get",
-    //     timeout : 500,
-    //     dataType: "json",
-    //     data: {},
-    //     success: function (t) {
-            
-    //     },
-    //     complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
-    //         if(status=='timeout'){
-    //             alert("连接ZMQ服务超时");
-    //         }
-    //     }
-    // });
-
-    $('#pie_content').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            backgroundColor: 'rgba(0,0,0,0)'
-        },
-        title: {
-            text:null,
-        },
-        tooltip: {
-            headerFormat: '{series.name}<br>',
-            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        legend: {//控制图例显示位置
-            floating: true,
-            //layout: 'vertical',
-            align: 'left',
-            verticalAlign: 'top',
-            borderWidth: 0
-        },
-        series: [{
-            type: 'pie',
-            name: '系统COP',
-            data: [
-                ['良好',   1],
-                ['优秀',   0],
-                ['中等',   0],
-                ['较差',   0]
-            ]
-        }]
-    });
-});
-
-</script>
-<!------------------------------ 饼图JS结束 ------------------------>

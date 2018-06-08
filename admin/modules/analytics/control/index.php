@@ -8,18 +8,18 @@ defined('ByAcesoft') or exit('Access Invalid!');
 class indexControl extends SystemControl{
 
 	private $links = array(
-			array('url'=>'act=index&op=system_cop','text'=>'系统COP'),
-			array('url'=>'act=index&op=host_cop','text'=>'主机COP'),
-			array('url'=>'act=index&op=ldb_analytics','text'=>'冷冻泵分析'),
-			array('url'=>'act=index&op=lqb_analytics','text'=>'冷却泵分析'),
-			array('url'=>'act=index&op=lds_analytics','text'=>'冷冻水分析'),
-			array('url'=>'act=index&op=lqs_analytics','text'=>'冷却水分析'),
-			array('url'=>'act=index&op=comb_analytics','text'=>'综合数据分析')
+		array('url'=>'act=index&op=system_cop','text'=>'系统COP'),
+		array('url'=>'act=index&op=host_cop','text'=>'主机COP'),
+		array('url'=>'act=index&op=ldb_analytics','text'=>'冷冻泵分析'),
+		array('url'=>'act=index&op=lqb_analytics','text'=>'冷却泵分析'),
+		array('url'=>'act=index&op=comb_analytics','text'=>'综合数据分析')
 	);
 	public function __construct(){
 		parent::__construct();
 		Language::read('web_config');
 		Tpl::output('wdate', date('Y-m-d') );
+		Tpl::output('wdate_day', date('Y-m-d') );
+		Tpl::output('wdate_month', date('Y-m') );
 	}
 	
 	public function indexOp() {
@@ -48,13 +48,16 @@ class indexControl extends SystemControl{
 		if( $_GET['date_type'] == 1 ) {
 			$condition = array();
 			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
-			$condition['RealCop'] = array('egt', 2);
-			$res_avg = $model->table('hostrealtime')->field("HOUR (RecordTime) AS hours, FORMAT(AVG(`RealCOP`),2) as avgcop")->where($condition)->group('hours')->select();
+			$condition['DeviceID'] = 100 ;
+			$condition['RealCoeff'] = array('egt', 2);
+			$res_avg = $model->table('devicerealtime')->field("HOUR (RecordTime) AS hours, FORMAT(AVG(`RealCoeff`),2) as avgcop")->where($condition)->group('hours')->select();
 			$avgcop = array_column($res_avg, 'avgcop', 'hours');
 			//系统信息
 			$condition = array();
-			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
-			$res_sysinfo = $model->table('hostrealtime')->field("FORMAT(MAX(`Refrigerator`),2) as t_refrigerator, FORMAT(MAX(`CurEnergy`),2) as t_energy, FORMAT(MAX(`CurTime`),2) as t_time, FORMAT(AVG(`RealCOP`),2) as avgcop")->where($condition)->select();
+			$condition['RecordDate'] = array('like', $_GET['wdate']."%");
+			$condition['DeviceID'] = array('egt', 100) ;
+			$condition['DeviceID'] = array('lt', 200) ;
+			$res_sysinfo = $model->table('acedevday')->field("SUM(DayEnergy*AvgCoeff) as ttCooling, SUM(`TotalEnergy`) as ttEnergy, SUM(`DayRunTime`) as ttRun, AVG(`AvgCoeff`) as avgcop")->where($condition)->select();
 			//返回数据
 			$result = array('status' => 1, 'msg' => 'succ', 'data' => array('avgcop' => $avgcop, 'sysinfo' => $res_sysinfo[0]));
 			die(json_encode($result));
@@ -63,17 +66,17 @@ class indexControl extends SystemControl{
 		if( $_GET['date_type'] == 2 ) {
 			$condition = array();
 			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
-			$condition['RealCop'] = array('egt', 2);
-			$res_avg = $model->table('hostrealtime')->field("DAY (RecordTime) AS days, FORMAT(AVG(`RealCOP`),2) as avgcop")->where($condition)->group('days')->select();
+			$condition['DeviceID'] = 100 ;
+			$condition['RealCoeff'] = array('egt', 2);
+			$res_avg = $model->table('devicerealtime')->field("DAY (RecordTime) AS days, FORMAT(AVG(`RealCoeff`),2) as avgcop")->where($condition)->group('days')->select();
 			$avgcop = array_column($res_avg, 'avgcop', 'days');
 			$tmp = explode("-", $_GET['wdate']);
 			//系统信息
-			$sql = "SELECT FORMAT(SUM(a.t_refrigerator),2) AS t_refrigerator, FORMAT(SUM(a.t_energy),2) AS t_energy, FORMAT(SUM(a.t_time),2) AS t_time, AVG(avgcop) AS avgcop FROM (
-				SELECT DAY (RecordTime) AS days, MAX(`Refrigerator`) AS t_refrigerator, MAX(`CurEnergy`) AS t_energy, MAX(`CurTime`) AS t_time, FORMAT(AVG(`RealCOP`),2) AS avgcop FROM `".DBPRE."hostrealtime` 
-				WHERE ( RecordTime LIKE '".$_GET['wdate']."%' ) AND ( RealCop >= '2' ) 
-				GROUP BY days LIMIT 1000
-				) AS a";//echo $sql;exit;
-			$res_sysinfo = $model->query($sql);
+			$condition = array();
+			$condition['RecordDate'] = array('like', $_GET['wdate']."%");
+			$condition['DeviceID'] = array('egt', 100) ;
+			$condition['DeviceID'] = array('lt', 200) ;
+			$res_sysinfo = $model->table('acedevday')->field("SUM(DayEnergy*AvgCoeff) as ttCooling, SUM(`TotalEnergy`) as ttEnergy, SUM(`DayRunTime`) as ttRun, AVG(`AvgCoeff`) as avgcop")->where($condition)->select();
 			//返回数据
 			$result = array('status' => 1, 'msg' => 'succ', 'data' => array('avgcop' => $avgcop, 'sysinfo' => $res_sysinfo[0]), 'days' => cal_days_in_month(CAL_GREGORIAN, $tmp[1], $tmp[0]));
 			die(json_encode($result));
@@ -103,16 +106,17 @@ class indexControl extends SystemControl{
 		if( $_GET['date_type'] == 1 ) {
 			$condition = array();
 			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
-			$condition['RealCop'] = array('egt', 2);
+			$condition['RealCoeff'] = array('egt', 2);
 			$condition['DeviceID'] = $device;
-			$res_avg = $model->table('hostrealtime')->field("HOUR (RecordTime) AS hours, FORMAT(AVG(`RealCOP`),2) as avgcop")->where($condition)->group('hours')->select();
+			$res_avg = $model->table('devicerealtime')->field("HOUR (RecordTime) AS hours, FORMAT(AVG(`RealCoeff`),2) as avgcop")->where($condition)->group('hours')->select();
 			$avgcop = array_column($res_avg, 'avgcop', 'hours');
 			//echo $model->getLastSql();exit;
 			//系统信息
 			$condition = array();
-			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
+			$condition['RecordDate'] = array('like', $_GET['wdate']."%");
 			$condition['DeviceID'] = $device;
-			$res_sysinfo = $model->table('hostrealtime')->field("FORMAT(MAX(`Refrigerator`),2) as t_refrigerator, FORMAT(MAX(`CurEnergy`),2) as t_energy, FORMAT(MAX(`CurTime`),2) as t_time, FORMAT(AVG(`RealCOP`),2) as avgcop")->where($condition)->select();
+			$res_sysinfo = $model->table('acedevday')->field("SUM(DayEnergy*AvgCoeff) as ttCooling, SUM(`TotalEnergy`) as ttEnergy, SUM(`DayRunTime`) as ttRun, AVG(`AvgCoeff`) as avgcop")->where($condition)->select();
+			//echo $model->getLastSql();exit;
 			//返回数据
 			$result = array('status' => 1, 'msg' => 'succ', 'data' => array('avgcop' => $avgcop, 'sysinfo' => $res_sysinfo[0]));
 			die(json_encode($result));
@@ -121,18 +125,16 @@ class indexControl extends SystemControl{
 		if( $_GET['date_type'] == 2 ) {
 			$condition = array();
 			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
-			$condition['RealCop'] = array('egt', 2);
+			$condition['RealCoeff'] = array('egt', 2);
 			$condition['DeviceID'] = $device;
-			$res_avg = $model->table('hostrealtime')->field("DAY (RecordTime) AS days, FORMAT(AVG(`RealCOP`),2) as avgcop")->where($condition)->group('days')->select();
+			$res_avg = $model->table('devicerealtime')->field("DAY (RecordTime) AS days, FORMAT(AVG(`RealCoeff`),2) as avgcop")->where($condition)->group('days')->select();
 			$avgcop = array_column($res_avg, 'avgcop', 'days');
 			$tmp = explode("-", $_GET['wdate']);
 			//系统信息
-			$sql = "SELECT FORMAT(SUM(a.t_refrigerator),2) AS t_refrigerator, FORMAT(SUM(a.t_energy),2) AS t_energy, FORMAT(SUM(a.t_time),2) AS t_time, AVG(avgcop) AS avgcop FROM (
-				SELECT DAY (RecordTime) AS days, MAX(`Refrigerator`) AS t_refrigerator, MAX(`CurEnergy`) AS t_energy, MAX(`CurTime`) AS t_time, FORMAT(AVG(`RealCOP`),2) AS avgcop FROM `".DBPRE."hostrealtime` 
-				WHERE ( RecordTime LIKE '".$_GET['wdate']."%' ) AND ( RealCop >= '2' ) AND ( DeviceID = ".$device." )
-				GROUP BY days LIMIT 1000
-				) AS a";
-			$res_sysinfo = $model->query($sql);
+			$condition = array();
+			$condition['RecordDate'] = array('like', $_GET['wdate']."%");
+			$condition['DeviceID'] = $device;
+			$res_sysinfo = $model->table('acedevday')->field("SUM(DayEnergy*AvgCoeff) as ttCooling, SUM(`TotalEnergy`) as ttEnergy, SUM(`DayRunTime`) as ttRun, AVG(`AvgCoeff`) as avgcop")->where($condition)->select();
 			//返回数据
 			$result = array('status' => 1, 'msg' => 'succ', 'data' => array('avgcop' => $avgcop, 'sysinfo' => $res_sysinfo[0]), 'days' => cal_days_in_month(CAL_GREGORIAN, $tmp[1], $tmp[0]));
 			die(json_encode($result));
@@ -148,7 +150,7 @@ class indexControl extends SystemControl{
 		Tpl::showpage('ldb_analytics.list');
 	}
 	/**
-	 * 冷冻泵分析页面展示
+	 * 冷却泵分析页面展示
 	 */
 	public function lqb_analyticsOp() {
 		Tpl::output('top_link',$this->sublink($this->links, 'lqb_analytics'));
@@ -170,34 +172,35 @@ class indexControl extends SystemControl{
 		if( $_GET['date_type'] == 1 ) {
 			$condition = array();
 			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
+			$condition['RealCoeff'] = array('egt', 2);
 			$condition['DeviceID'] = $device;
-			$res_avg = $model->table('devicerealtime')->field("HOUR (RecordTime) AS hours, FORMAT(AVG(`RealFreq`),2) as avgfreq")->where($condition)->group('hours')->select();
-			$avgfreq = array_column($res_avg, 'avgfreq', 'hours');
+			$res_avg = $model->table('devicerealtime')->field("HOUR (RecordTime) AS hours, FORMAT(AVG(`RealCoeff`),2) as avgcop")->where($condition)->group('hours')->select();
+			$avgcop = array_column($res_avg, 'avgcop', 'hours');
 			//echo $model->getLastSql();exit;
 			//系统信息
 			$condition = array();
-			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
+			$condition['RecordDate'] = array('like', $_GET['wdate']."%");
 			$condition['DeviceID'] = $device;
-			$res_sysinfo = $model->table('devicerealtime')->field("FORMAT(MAX(`CurEnergy`),2) as t_energy, FORMAT(MAX(`CurTime`),2) as t_time, FORMAT(AVG(`RealFreq`),2) as avgfreq")->where($condition)->select();
+			$res_sysinfo = $model->table('acedevday')->field("SUM(`TotalEnergy`) as ttEnergy, SUM(`DayRunTime`) as ttRun, AVG(`AvgCoeff`) as avgcop")->where($condition)->select();
+			//echo $model->getLastSql();exit;
 			//返回数据
-			$result = array('status' => 1, 'msg' => 'succ', 'data' => array('avgcop' => $avgfreq, 'sysinfo' => $res_sysinfo[0]));
+			$result = array('status' => 1, 'msg' => 'succ', 'data' => array('avgcop' => $avgcop, 'sysinfo' => $res_sysinfo[0]));
 			die(json_encode($result));
 		}
 		//按月
 		if( $_GET['date_type'] == 2 ) {
 			$condition = array();
 			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
+			$condition['RealCoeff'] = array('egt', 2);
 			$condition['DeviceID'] = $device;
-			$res_avg = $model->table('devicerealtime')->field("DAY (RecordTime) AS days, FORMAT(AVG(`RealFreq`),2) as avgfreq")->where($condition)->group('days')->select();
-			$avgcop = array_column($res_avg, 'avgfreq', 'days');
+			$res_avg = $model->table('devicerealtime')->field("DAY (RecordTime) AS days, FORMAT(AVG(`RealCoeff`),2) as avgcop")->where($condition)->group('days')->select();
+			$avgcop = array_column($res_avg, 'avgcop', 'days');
 			$tmp = explode("-", $_GET['wdate']);
 			//系统信息
-			$sql = "SELECT FORMAT(SUM(a.t_energy),2) AS t_energy, FORMAT(SUM(a.t_time),2) AS t_time, AVG(avgfreq) AS avgfreq FROM (
-				SELECT DAY (RecordTime) AS days, MAX(`CurEnergy`) AS t_energy, MAX(`CurTime`) AS t_time, FORMAT(AVG(`RealFreq`),2) AS avgfreq FROM `".DBPRE."devicerealtime` 
-				WHERE ( RecordTime LIKE '".$_GET['wdate']."%' ) AND ( DeviceID = ".$device." )
-				GROUP BY days LIMIT 1000
-				) AS a";//echo $sql;exit;
-			$res_sysinfo = $model->query($sql);
+			$condition = array();
+			$condition['RecordDate'] = array('like', $_GET['wdate']."%");
+			$condition['DeviceID'] = $device;
+			$res_sysinfo = $model->table('acedevday')->field("SUM(`TotalEnergy`) as ttEnergy, SUM(`DayRunTime`) as ttRun, AVG(`AvgCoeff`) as avgcop")->where($condition)->select();
 			//返回数据
 			$result = array('status' => 1, 'msg' => 'succ', 'data' => array('avgcop' => $avgcop, 'sysinfo' => $res_sysinfo[0]), 'days' => cal_days_in_month(CAL_GREGORIAN, $tmp[1], $tmp[0]));
 			die(json_encode($result));
@@ -205,69 +208,15 @@ class indexControl extends SystemControl{
 	}
 
 	/**
-	 * 冷冻水分析页面展示
-	 */
-	public function lds_analyticsOp() {
-		Tpl::output('top_link',$this->sublink($this->links, 'lds_analytics'));
-		Tpl::setDirquna('analytics');
-		Tpl::showpage('lds_analytics.list');
-	}
-
-	/**
-	 * 水温分析ajax数据获取
-	 */
-	public function water_analytics_ajaxOp() {
-		if( $_GET['wdate'] == "" ) {
-			$result = array('status' => 0, 'msg' => '参数为空', 'data'=>'');
-			die(json_encode($result));
-		}
-		
-		$model = Model();
-		//按日
-		if( $_GET['date_type'] == 1 ) {
-			$condition = array();
-			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
-			$res = $model->table('envrealtime')
-							->field("HOUR (RecordTime) AS hours, T1, T2, T3, T4")
-							->where($condition)
-							->group('hours')
-							->select();
-			$data = array_column($res, null, 'hours');
-			$result = array('status' => 1, 'msg' => 'succ', 'data' => $data);
-			die(json_encode($result));
-		}
-		//按月
-		if( $_GET['date_type'] == 2 ) {
-			$condition = array();
-			$condition['RecordTime'] = array('like', $_GET['wdate']."%");
-			$res = $model->table('envrealtime')
-							->field("DAY (RecordTime) AS days, T1, T2, T3, T4")
-							->where($condition)
-							->group('days')
-							->select();
-			$data = array_column($res, null, 'days');
-			$tmp = explode("-", $_GET['wdate']);
-			//返回数据
-			$result = array('status' => 1, 'msg' => 'succ', 'data' => $data, 'days' => cal_days_in_month(CAL_GREGORIAN, $tmp[1], $tmp[0]));
-			die(json_encode($result));
-		}
-	}
-
-	/**
-	 * 冷却水分析页面展示
-	 */
-	public function lqs_analyticsOp() {
-		Tpl::output('top_link',$this->sublink($this->links, 'lqs_analytics'));
-		Tpl::setDirquna('analytics');
-		Tpl::showpage('lqs_analytics.list');
-	}
-
-	/**
 	 * 综合分析页面展示
 	 */
 	public function comb_analyticsOp() {
-		Tpl::output('begin', date("Y-m-d",strtotime("-30 day")) );
-		Tpl::output('end', date('Y-m-d'));
+		$begin = date("Y-m-d",strtotime("-30 day")) ;
+		$end = date('Y-m-d') ;
+		// $begin = "2018-01-01";
+		// $end = "2018-02-01";
+		Tpl::output('begin', $begin );
+		Tpl::output('end', $end );
 		Tpl::output('top_link',$this->sublink($this->links, 'comb_analytics'));
 		Tpl::setDirquna('analytics');
 		Tpl::showpage('comb_analytics.list');
@@ -281,28 +230,28 @@ class indexControl extends SystemControl{
 			case 1 ://系统总耗电量
 				$data = $this -> _get_system_total_energy($_GET['begin'], $_GET['end']) ;
 				break;
-			case 2 ://系统总功率
-				$data = $this -> _get_system_total_power($_GET['begin'], $_GET['end']) ;
-				break;
-			case 3 ://系统总制冷量
-				$data = $this -> _get_system_total_refrigerator($_GET['begin'], $_GET['end']) ;
-				break;
-			case 4 ://系统运行时间
-				$data = $this -> _get_system_total_time($_GET['begin'], $_GET['end']) ;
-				break;
-			case 5 ://系统COP值
-				$data = $this -> _get_system_cop($_GET['begin'], $_GET['end']) ;
-				break;
-			case 6 ://系统当天节省电量
-				$data = $this -> _get_system_saveenergy_day($_GET['begin'], $_GET['end']) ;
-				break;
-			case 7 ://系统当天CO2减排量
-				$data = $this -> _get_system_saveco2_day($_GET['begin'], $_GET['end']) ;
-				break;
-			case 8 ://系统当天节省费用
-				$data = $this -> _get_system_savemoney_day($_GET['begin'], $_GET['end']) ;
-				break;
-			case 9 ://系统当天节省费用
+			// case 2 ://系统总功率
+			// 	$data = $this -> _get_system_total_power($_GET['begin'], $_GET['end']) ;
+			// 	break;
+			// case 3 ://系统总制冷量
+			// 	$data = $this -> _get_system_total_refrigerator($_GET['begin'], $_GET['end']) ;
+			// 	break;
+			// case 4 ://系统运行时间
+			// 	$data = $this -> _get_system_total_time($_GET['begin'], $_GET['end']) ;
+			// 	break;
+			// case 5 ://系统COP值
+			// 	$data = $this -> _get_system_cop($_GET['begin'], $_GET['end']) ;
+			// 	break;
+			// case 6 ://系统当天节省电量
+			// 	$data = $this -> _get_system_saveenergy_day($_GET['begin'], $_GET['end']) ;
+			// 	break;
+			// case 7 ://系统当天CO2减排量
+			// 	$data = $this -> _get_system_saveco2_day($_GET['begin'], $_GET['end']) ;
+			// 	break;
+			// case 8 ://系统当天节省费用
+			// 	$data = $this -> _get_system_savemoney_day($_GET['begin'], $_GET['end']) ;
+			// 	break;
+			case 9 ://主机电量
 				$data = $this -> _get_host_energy($_GET['begin'], $_GET['end']) ;
 				break;
 			case 10 ://冷冻泵电量

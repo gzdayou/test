@@ -293,7 +293,7 @@ function change_season(mod) {
     var change_mod = (mod == 1) ? '夏季模式' : "冬季模式";
     if(confirm('确认切换季节模式为'+change_mod+'吗？')){
         $.ajax({
-            url: "<?php echo ADMIN_SITE_URL;?>/index.php?act=common&op=ctrlcmd",
+            url: "<?php echo ADMIN_SITE_URL;?>/modules/system/index.php?act=device_control&op=ctrlcmd",
             type: "get",
             timeout : 500,
             dataType: "json",
@@ -337,7 +337,7 @@ function emer_set() {
                     var sw = eswtich[i];
                     if( $("#"+id).val() != '' && !$("#"+sw).prop('checked') ) {
                         $.ajax({
-                            url: "<?php echo ADMIN_SITE_URL;?>/index.php?act=common&op=ctrlcmd",
+                            url: "<?php echo ADMIN_SITE_URL;?>/modules/system/index.php?act=device_control&op=ctrlcmd",
                             type: "get",
                             timeout : 500,
                             dataType: "json",
@@ -364,7 +364,7 @@ function emer_set() {
                     c_model = c_model | 4;
                 }
                 $.ajax({
-                    url: "<?php echo ADMIN_SITE_URL;?>/index.php?act=common&op=ctrlcmd",
+                    url: "<?php echo ADMIN_SITE_URL;?>/modules/system/index.php?act=device_control&op=ctrlcmd",
                     type: "get",
                     timeout : 500,
                     dataType: "json",

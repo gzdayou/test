@@ -90,7 +90,7 @@ $('#container').highcharts({
             color: '#808080'
         }],
         title: {
-            text: '冷却泵电量'
+            text: '冷却塔电量'
         }
     },
     plotOptions: {
@@ -102,7 +102,7 @@ $('#container').highcharts({
         }
     },
     series: [{
-        name : "冷却泵电量" ,
+        name : "冷却塔电量" ,
         data: data
     }]
 });
